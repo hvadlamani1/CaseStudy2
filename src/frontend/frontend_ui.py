@@ -8,7 +8,7 @@ import os
 # Check your open_ports.csv and VM network interface (eth0) for these details.
 BACKEND_API_URL = "http://10.188.207.87:9001/process_audio"
 
-def transcribe_audio_ui(audio_file, use_local_model, hf_token: gr.OAuthToken = None):
+def transcribe_audio_ui(audio_file, hf_token: gr.OAuthToken = None):
     if audio_file is None:
         yield "Please upload an audio file", "Please upload an audio file"
         return
@@ -18,9 +18,7 @@ def transcribe_audio_ui(audio_file, use_local_model, hf_token: gr.OAuthToken = N
           gr.update(value="Waiting...", label="Step 2: Plain English Interpretation")
 
     # Prepare the payload to send to your FastAPI backend
-    payload_data = {
-        "use_local_model": use_local_model
-    }
+    payload_data = {}
     
     if hf_token and hf_token.token:
         payload_data["hf_token"] = hf_token.token
@@ -63,8 +61,7 @@ def transcribe_audio_ui(audio_file, use_local_model, hf_token: gr.OAuthToken = N
 grInt = gr.Interface(
     fn=transcribe_audio_ui,
     inputs=[
-        gr.Audio(type="filepath"),
-        gr.Checkbox(label="Use VM Backend Model", value=False)
+        gr.Audio(type="filepath")
     ],
     outputs=[
         gr.Textbox(label="Step 1: Raw ATC Transcription"),
