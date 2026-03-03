@@ -8,7 +8,7 @@ import os
 # Check your open_ports.csv and VM network interface (eth0) for these details.
 BACKEND_API_URL = "http://10.188.207.87:9001/process_audio"
 
-def transcribe_audio_ui(audio_file, hf_token: gr.OAuthToken = None):
+def transcribe_audio_ui(audio_file):
     if audio_file is None:
         yield "Please upload an audio file", "Please upload an audio file"
         return
@@ -18,10 +18,13 @@ def transcribe_audio_ui(audio_file, hf_token: gr.OAuthToken = None):
           gr.update(value="Waiting...", label="Step 2: Plain English Interpretation")
 
     # Prepare the payload to send to your FastAPI backend
-    payload_data = {}
-    
-    if hf_token and hf_token.token:
-        payload_data["hf_token"] = hf_token.token
+    payload_data = {
+    }
+
+    # Safely grab the token from the environment variable we exported
+    hf_env_token = os.environ.get("HF_TOKEN")
+    if hf_env_token:
+        payload_data["hf_token"] = hf_env_token
 
     try:
         # Open the audio file and send it via HTTP POST
@@ -75,7 +78,6 @@ grInt = gr.Interface(
 )
 
 with gr.Blocks() as demo:
-    gr.LoginButton()
     grInt.render()
 
 if __name__ == "__main__":
