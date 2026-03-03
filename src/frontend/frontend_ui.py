@@ -6,7 +6,7 @@ import os
 # --- Configuration ---
 # You MUST replace this IP and Port with your group's specific backend VM IP and the port you used for FastAPI
 # Check your open_ports.csv and VM network interface (eth0) for these details.
-BACKEND_API_URL = "http://10.188.207.87:9001/process_audio"
+BACKEND_API_URL = "http://paffenroth-23.dyn.wpi.edu:9001/process_audio"
 
 
 def transcribe_audio_ui(audio_file):
