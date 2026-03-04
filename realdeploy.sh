@@ -11,9 +11,10 @@ else
     exit 1
 fi
 
-# Cron needs absolute paths to your keys on the WPI Linux machine
-LOCAL_DEFAULT_KEY="/Users/hemuvadlamani/Documents/MLOps/CaseStudy2/group_key"
-LOCAL_NEW_KEY="/Users/hemuvadlamani/Documents/MLOps/CaseStudy2/new_key"
+# Paths and variables for public and private key
+#Path is changed when running the cron job
+LOCAL_DEFAULT_KEY="group_key"
+LOCAL_NEW_KEY="new_key"
 
 VM_USER="group01"
 VM_HOST="paffenroth-23.dyn.wpi.edu"
