@@ -3,9 +3,7 @@ import requests
 import time
 import os
 
-# --- Configuration ---
-# You MUST replace this IP and Port with your group's specific backend VM IP and the port you used for FastAPI
-# Check your open_ports.csv and VM network interface (eth0) for these details.
+#Where to send the backend requests
 BACKEND_API_URL = "http://paffenroth-23.dyn.wpi.edu:9001/process_audio"
 
 
